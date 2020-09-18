@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<table border='1' style="width:100%; border: 2px solid lightgrey; border-radius: 3px">
+    <tr>
+    <th>Reference no.</th><th>Date</th><th>Name</th><th>D.O.B</th><th>Age</th><th>Gender</th><th>Address</th><th>Phone Number</th><th>Email Address</th>
+    </tr>
+{% for data in datas %}
+    <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ date }}</td>
+    <td>{{ data.fn }} {{ data.ln }}</td>
+    <td>{{ data.dob }}</td>
+    <td>{{ data.age }}</td>
+    <td>{{ data.gen }}</td>
+        <td>{{ data.add1 }}, {{ data.add2 }}, {{ data.add3 }}, {{ data.add4 }}</td>
+    <td>{{ data.mob }}</td>
+    <td>{{ data.email }}</td>
+    </tr>
+    <tr>
+        <td colspan="9"><a href="{{ url_for('edit', data_id=data.id) }}" class='btn btn-primary'>Edit</a>
+        <a href="{{ url_for('delete', data_id=data.id) }}" class='btn btn-danger'>Delete</a></td>
+    </tr>
+{% endfor %}
+ </table>
+
+{% endblock %}

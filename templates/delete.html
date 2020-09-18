@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form action="{{ url_for('delete', data_id=data_id) }}" method="post">
+{{ form.csrf_token }}
+<h3>Are you sure to delete the record?</h3>
+{{ form.dlt (class='btn btn-danger') }}
+<a href="{{ url_for('home') }}" class='btn btn-primary'>Cancel</a>
+</form>
+{% endblock %}

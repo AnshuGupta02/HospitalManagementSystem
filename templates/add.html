@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{#% import "bootstrap/wtf.html" as wtf %#}
+
+{% block main %}
+    <!--{ { wtf.quick_form(form) }}-->
+    <div class="content-section">
+<form action="{{ url_for('add') }}" method="post">
+
+{{ form.csrf_token }}
+    <fieldset class="form-group">
+    {{ form.imag.label (style="float:right; margin-right:155px;")}}<br><br>
+    {{ form.imag (style="float:right;")}}
+Name:
+{{ form.fn }}
+{{ form.ln }}
+<br><br>
+{{ form.dob.label }}
+{{ form.dob }} as on <acronym title="YYYY-MM-DD" style="text-decoration: none;">{{ date }}</acronym>
+<br><br>
+{{ form.gen.label }}
+{{ form.gen }}
+<br><br>{{ form.add1.label}}
+    {{ form.add1 }}
+    {{ form.add2 }}
+    {{ form.add3 }}
+    {{ form.add4 }}
+    <br><br>
+    {{ form.mob.label }}
+    {{ form.mob }}
+    <br><br>
+    {{ form.email.label }}
+    {{ form.email }}
+    <br><br>
+    <center style="width: 65%;">{{ form.submit (class='btn btn-outline-info')}}</center>
+
+<br>
+    </fieldset>
+</form>
+    </div>
+{% endblock main %} <!-- ese bhi likh skte hai or srf endblock bhi -->

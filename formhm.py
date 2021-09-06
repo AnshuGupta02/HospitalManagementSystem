@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, FileField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.fields.html5 import DateField, EmailField, IntegerField
-from wtforms.validators import data_required
+from wtforms.validators import data_required, ValidationError
 
 
 class add_patient(FlaskForm):
-    imag= FileField(label='Upload your image')
     fn=StringField('First name ', validators=[data_required()], render_kw={'placeholder':'First name'})
     ln=StringField('Last name ', render_kw={'placeholder': 'Last name'})
     dob=DateField('D.O.B ', format='%Y-%m-%d' , validators=[data_required()])
@@ -16,9 +15,11 @@ class add_patient(FlaskForm):
     add4= StringField('Address', render_kw={'placeholder' : 'Pincode'})
     mob=IntegerField('Phone no', render_kw={'placeholder': 'XXXXXXXXXX'}, validators=[ data_required()])
     email=EmailField('Email(if any)', render_kw={'placeholder': 'xyz@admin.com'})
-    # valid=validate_email(email=email)
-    # email=valid.email
     submit=SubmitField('Submit')
+
+    def validate_mob(self, field):
+        if len(str(field.data)) != 10:
+            raise ValidationError("Please enter a 10 digit number.")
 
 class delete(FlaskForm):
     dlt = SubmitField(label='Delete')

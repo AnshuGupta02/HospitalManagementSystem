@@ -1,6 +1,6 @@
 from apphm import db
 
-class manage(db.Model):
+class Manage(db.Model):
     id=db.Column( db.Integer, primary_key=True)
     date=db.Column('Date', db.DATE)
     fn=db.Column('First name', db.String, nullable=False)

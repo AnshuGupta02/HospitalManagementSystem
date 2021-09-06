@@ -4,12 +4,14 @@
 {% block main %}
     <!--{ { wtf.quick_form(form) }}-->
     <div class="content-section">
-<form action="{{ url_for('add') }}" method="post">
+<form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data">
 
 {{ form.csrf_token }}
-    <fieldset class="form-group">
-    {{ form.imag.label (style="float:right; margin-right:155px;")}}<br><br>
-    {{ form.imag (style="float:right;")}}
+    <div class="form-group">
+    <div class="float-right">
+        <label>Upload your Image: </label><br>
+        <input name="imag" type="file" accept="image/*">
+    </div>
 Name:
 {{ form.fn }}
 {{ form.ln }}
@@ -34,7 +36,7 @@ Name:
     <center style="width: 65%;">{{ form.submit (class='btn btn-outline-info')}}</center>
 
 <br>
-    </fieldset>
+    </div>
 </form>
     </div>
 {% endblock main %} <!-- ese bhi likh skte hai or srf endblock bhi -->

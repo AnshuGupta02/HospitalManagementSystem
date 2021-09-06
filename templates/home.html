@@ -2,27 +2,67 @@
 
 {% block main %}
 
-<table border='1' style="width:100%; border: 2px solid lightgrey; border-radius: 3px">
-    <tr>
-    <th>Reference no.</th><th>Date</th><th>Name</th><th>D.O.B</th><th>Age</th><th>Gender</th><th>Address</th><th>Phone Number</th><th>Email Address</th>
-    </tr>
-{% for data in datas %}
-    <tr>
-        <td>{{ data.id }}</td>
-        <td>{{ date }}</td>
-    <td>{{ data.fn }} {{ data.ln }}</td>
-    <td>{{ data.dob }}</td>
-    <td>{{ data.age }}</td>
-    <td>{{ data.gen }}</td>
-        <td>{{ data.add1 }}, {{ data.add2 }}, {{ data.add3 }}, {{ data.add4 }}</td>
-    <td>{{ data.mob }}</td>
-    <td>{{ data.email }}</td>
-    </tr>
-    <tr>
-        <td colspan="9"><a href="{{ url_for('edit', data_id=data.id) }}" class='btn btn-primary'>Edit</a>
-        <a href="{{ url_for('delete', data_id=data.id) }}" class='btn btn-danger'>Delete</a></td>
-    </tr>
-{% endfor %}
- </table>
+<div>
+    {% if not datas %}
+    <img class="d-block mx-auto mt-5" src="{{url_for('static', filename='images/no-records.png')}}">
+    {% endif %}
+    {% for data in datas %}
+    <div class="shadow p-3 mb-5 bg-white rounded">
+        <span class="float-right">{{moment(data.date).format("ll")}}</span><br>
+        <img class=" offset-2 float-right mr-5 my-2"
+             {% if data.id|string in images %}
+             {%set file = "images/" +data.id|string %}
+
+                    src="{{url_for('static', filename=file)}}"
+        {% else %}
+                    src="{{url_for('static', filename='images/Non-profile.jpg')}}"
+
+            {% endif %}
+             height="150">
+        <p><strong>Reference id: </strong>02102001{{data.id}}</p>
+
+        <div class="col-12 offset3">
+            <span><strong>Name:</strong> {{data.fn}} {{data.ln}}</span><br>
+            <span><strong>Date Of Birth(DOB):</strong> {{ moment(data.dob).format("LL") }}</span><br>
+            <span><strong>Age:</strong>(<small>as on {{moment().format('MMMM Do YYYY')}} </small>) {{ data.age }}</span><br>
+            <span><strong>Gender:</strong> {{data.gen}}</span><br>
+            <span><strong>Address:</strong> {{ data.add1 }}, {{ data.add2 }}, {{ data.add3 }}, {{ data.add4 }}</span><br>
+            <span><strong>Contact: </strong>
+                <em>Phone: </em><a href="tel:{{data.mob}}">{{ data.mob }}</a>
+                   {%if data.email %} <em>Email:</em> <a href="mailto:{{data.email}}">{{data.email}}</a>{%endif%}
+            </span><br>
+        </div>
+
+        <div class="text-right">
+            <a href="{{ url_for('edit', data_id=data.id) }}" class='btn-sm btn-outline-primary text-decoration-none'>Edit</a>
+        <a href="{{ url_for('delete', data_id=data.id) }}" class='btn-sm btn-outline-danger text-decoration-none'>Delete</a>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+<!--<table border='1' style="width:100%; border: 2px solid #DCDCDC; border-radius: 3px">-->
+<!--    <tr>-->
+<!--    <th>Reference no.</th><th>Date</th><th>Name</th><th>D.O.B</th><th>Age</th><th>Gender</th><th>Address</th><th>Phone Number</th><th>Email Address</th>-->
+<!--    </tr>-->
+<!--{% for data in datas %}-->
+<!--    <tr>-->
+<!--        <td>{{ data.id }}</td>-->
+<!--        <td>{{ date }}</td>-->
+<!--    <td>{{ data.fn }} {{ data.ln }}</td>-->
+<!--    <td>{{ data.dob }}</td>-->
+<!--    <td>{{ data.age }}</td>-->
+<!--    <td>{{ data.gen }}</td>-->
+<!--        <td>{{ data.add1 }}, {{ data.add2 }}, {{ data.add3 }}, {{ data.add4 }}</td>-->
+<!--    <td>{{ data.mob }}</td>-->
+<!--    <td>{{ data.email }}</td>-->
+<!--    </tr>-->
+<!--    <tr class="text-right">-->
+<!--        <td colspan="9"><a href="{{ url_for('edit', data_id=data.id) }}" class='btn-sm btn-outline-primary text-decoration-none'>Edit</a>-->
+<!--        <a href="{{ url_for('delete', data_id=data.id) }}" class='btn-sm btn-outline-danger text-decoration-none'>Delete</a></td>-->
+<!--    </tr>-->
+<!--{% endfor %}-->
+<!-- </table>-->
 
 {% endblock %}

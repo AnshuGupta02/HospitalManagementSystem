@@ -14,7 +14,6 @@ class Manage(db.Model):
     add4 = db.Column('Address4', db.String)
     mob=db.Column('Phone', db.Integer)
     email=db.Column('email', db.String)
-    imag=db.Column('Image')
 
     def __repr__(self):
         return f'registered on {self.date}, Name={self.fn} {self.ln}, dob={self.dob}, age={self.age}, gender={self.gen}, add={self.add1} {self.add2} {self.add3} {self.add4}, phone={self.mob} email={self.email}, {self.imag} '

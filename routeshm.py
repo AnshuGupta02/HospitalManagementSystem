@@ -6,18 +6,28 @@ from modelshm import Manage
 #from email_validator import validate_email
 import os
 
-@app.context_processor  # to make available Permission class with all its constants to all the tamplates,
-# to avoid add a template argumrnt in every render_template()
+@app.context_processor
 def inject_permissions():
     return dict(images=set(os.listdir("static//images")))
 
 @app.route('/')
-@app.route('/records')
+@app.route('/records', methods=["GET", "POST"])
 def home():
-    form = formhm.add_patient()
-    dat = datetime.now().date()
-    datas=Manage.query.all()
-    return render_template('home.html', page='RECORDS', datas=datas, date=dat, form=form,
+    k = request.form.get("key")
+    val1 = request.form.get("value1")
+    val2 = request.form.get("value2")
+    if not  val2 and k!="gen":
+        datas=Manage.query.order_by(Manage.date.desc()).all()
+    else:
+        if k == "gen":
+            v = val1
+        elif k == "id":
+            v = int(val2[8:])
+        else:
+            v = str(val2)
+        d = {k:v}
+        datas = Manage.query.filter_by(**d).order_by(Manage.date.desc()).all()
+    return render_template('home.html', page='RECORDS', datas=datas,
                            alert_type=request.args.get("alert_type"))
 
 
@@ -109,5 +119,3 @@ def delete(data_id):
         alert_type="danger"
     return redirect(url_for('home', alert_type=alert_type))
 
-def search():
-    pass

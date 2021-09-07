@@ -28,19 +28,24 @@
       </li>
     </ul>
 
-      <form class="form-inline my-2 my-md-0">
-          <select class="form-control form-select" aria-label="Default select example">
-          <option selected>ref id</option>
-          <option value="1">first name</option>
-          <option value="2">last name</option>
-          <option value="3">date of reg</option>
-              <option value="3">dob</option>
-              <option value="3">age</option>
-              <option value="3">gender</option>
-              <option value="3">phone</option>
-              <option value="3">email</option>
+      <form action="{{url_for('home')}}" method="post" class="form-inline my-2 my-md-0">
+          <select name="key" class="form-control form-select" id="search">
+          <option value="id" selected>ref id</option>
+          <option value="fn">first name</option>
+          <option value="ln">last name</option>
+          <option value="date">date of reg</option>
+              <option value="dob">dob</option>
+              <option value="age">age</option>
+              <option value="gen">gender</option>
+              <option value="mob">phone</option>
+              <option value="email">email</option>
         </select>
-          <input class="form-control">
+          <select name="value1" class="form-control form-select w-40" style="display: None;" id="sex">
+                <option value="Female" selected>Female</option>
+          <option value="Male">Male</option>
+          <option value="Other">Other</option>
+          </select>
+          <input name="value2" type="number" class="form-control" id="search_input" required>
           <button class="btn btn-secondary">Search</button>
     </form>
   </div>
@@ -66,7 +71,36 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+<script>
+          var sel = document.getElementById("search");
+          var input = document.getElementById("search_input");
+          var gendr = document.getElementById("sex");
+          input.required = true;
+          sel.onchange = function(){
+              var x = sel.value;
+              if (x === "id" || x === "age" || x=== "mob"){
+                  input.style.display = "inline";
+                  gendr.style.display = "none";
+                      input.setAttribute("type", "number");
+              }else if (x === "fn" || x ==="ln" ){
+                  input.style.display = "inline";
+                  gendr.style.display = "none";
+                      input.setAttribute("type", "text");
+              }else if (x === "dob" || x === "date"){
+                      input.style.display = "inline";
+                      gendr.style.display = "none";
+                      input.setAttribute("type", "date");
+              }else if (x==="email"){
+                  input.style.display = "inline";
+                  gendr.style.display = "none";
+                      input.setAttribute("type", "email");
+              }else if (x === "gen"){
+                  input.style.display = "none";
+                  input.required=false;
+                  gendr.style.display = "inline";
+              }
+          };
+</script>
 
 </body>
 </html>

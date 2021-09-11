@@ -3,7 +3,6 @@ from flask import render_template, flash, get_flashed_messages, redirect, url_fo
 import formhm
 from datetime import datetime, date
 from modelshm import Manage
-#from email_validator import validate_email
 import os
 
 @app.context_processor
@@ -22,7 +21,10 @@ def home():
         if k == "gen":
             v = val1
         elif k == "id":
-            v = int(val2[8:])
+            if len(val2) >= 8:
+                v = int(val2[8:])
+            else:
+                v = float("inf")
         else:
             v = str(val2)
         d = {k:v}

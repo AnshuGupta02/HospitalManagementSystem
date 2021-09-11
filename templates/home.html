@@ -5,6 +5,8 @@
 <div>
     {% if not datas %}
     <img class="d-block mx-auto mt-5" src="{{url_for('static', filename='images/no-records.png')}}">
+    {% else %}
+    <p class="bg-light p-2 mt-3">{{datas | length}} records found.</p>
     {% endif %}
     {% for data in datas %}
     <div class="shadow p-3 mb-5 bg-white rounded">

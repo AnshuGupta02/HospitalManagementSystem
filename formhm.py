@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.fields.html5 import DateField, EmailField, IntegerField
-from wtforms.validators import data_required, ValidationError
+from wtforms.validators import data_required, ValidationError, Email
 
 
 class add_patient(FlaskForm):
@@ -14,7 +14,7 @@ class add_patient(FlaskForm):
     add3= StringField('Address', render_kw={'placeholder' : 'State'})
     add4= StringField('Address', render_kw={'placeholder' : 'Pincode'})
     mob=IntegerField('Phone no', render_kw={'placeholder': 'XXXXXXXXXX'}, validators=[ data_required()])
-    email=EmailField('Email(if any)', render_kw={'placeholder': 'xyz@admin.com'})
+    email=EmailField('Email(if any)', render_kw={'placeholder': 'xyz@admin.com'}, validators=[Email()])
     submit=SubmitField('Submit')
 
     def validate_mob(self, field):

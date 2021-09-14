@@ -27,7 +27,7 @@ background-color: rgb(0,0,0); /* Fallback color */
   text-align: center;">
             <h1 class="display-2">TOWN HOSPITAL</h1>
         <p class="display-5">Aapki apni locality me</p>
-        <h2 class="display-4">{{ page }}</h2>
+        <h2 class="display-4" id="content">{{ page }}</h2>
     </div>
 </div>
 
@@ -39,10 +39,10 @@ background-color: rgb(0,0,0); /* Fallback color */
   <div class="collapse navbar-collapse" id="navbarsExample05">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('home') }}">Records <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ url_for('home') }}#content">Records <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('add') }}">New Registration</a>
+        <a class="nav-link" href="{{ url_for('add') }}#content">New Registration</a>
       </li>
     </ul>
 

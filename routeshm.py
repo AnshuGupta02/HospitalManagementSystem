@@ -5,9 +5,10 @@ from datetime import datetime, date
 from modelshm import Manage
 import os
 
+
 @app.context_processor
 def inject_permissions():
-    return dict(images=set(os.listdir("static//images")))
+    return dict(images=set(os.listdir("static/images")))
 
 @app.route('/')
 @app.route('/records', methods=["GET", "POST"])

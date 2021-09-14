@@ -1,14 +1,30 @@
 {% extends 'base.html' %}
-{#% import "bootstrap/wtf.html" as wtf %#}
 
 {% block main %}
-    <!--{ { wtf.quick_form(form) }}-->
-    <div class="content-section">
-<form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data">
+
+<div class="card container content-section mb-5 shadow-lg p-3 mb-5 bg-white rounded">
+
+{#    <form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data" class="card-body">#}
+{#            {{ form.hidden_tags }}#}
+{##}
+{#        <div class="form-group float-right">#}
+{#            <label class="col-form-label">Upload your Image: </label>#}
+{#            <input class="form-control-file" name="imag" type="file" accept="image/*">#}
+{#        </div>#}
+{##}
+{#        <div class="row">#}
+{#            <label>Name:</label>#}
+{#            {{ form.fn(class_="form-control col-4 mx-2") }}#}
+{#            {{ form.ln(class_="form-control col-4") }}#}
+{#        </div>#}
+{##}
+{#    </form>#}
+
+<form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data" class="card-body">
 
 {{ form.csrf_token }}
     <div class="form-group">
-    <div class="float-right">
+    <div class=" form-group float-right">
         <label>Upload your Image: </label><br>
         <input name="imag" type="file" accept="image/*">
     </div>
@@ -34,9 +50,9 @@ Name:
     {{ form.email }}
     <br><br>
     <center style="width: 65%;">{{ form.submit (class='btn btn-outline-info')}}</center>
-
-<br>
     </div>
 </form>
-    </div>
-{% endblock main %} <!-- ese bhi likh skte hai or srf endblock bhi -->
+
+</div>
+
+{% endblock main %}
